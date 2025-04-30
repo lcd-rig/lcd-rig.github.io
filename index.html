@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>BOW: Bayesian Optimization over Windows for Motion Planning in Complex Environments</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,500,600" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Open Graph and Twitter Card Meta Tags -->
+    <meta property="og:site_name" content="BOW Planner" />
+    <meta property="og:title" content="BOW: Bayesian Optimization over Windows for Motion Planning in Complex Environments" />
+    <meta property="og:description" content="A scalable motion planning algorithm using constrained Bayesian optimization for robots in complex environments." />
+    <meta property="og:url" content="https://yourwebsite.com" />
+    <meta property="og:image" content="https://yourwebsite.com/assets/env_overlay.png" />
+
+    <meta property="article:publisher" content="https://yourwebsite.com" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="BOW Planner" />
+    <meta name="twitter:description" content="A scalable motion planning algorithm using constrained Bayesian optimization for robots in complex environments." />
+    <meta name="twitter:url" content="https://yourwebsite.com" />
+    <meta name="twitter:image" content="https://yourwebsite.com/assets/env_overlay.png" />
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.6.0/lib/p5.js"></script>
+    <script src="sketch.js" type="text/javascript"></script>
+</head>
+
+<body>
+    <!-- Banner Section -->
+    <div class="container">
+        <div class="text-center py-5">
+            <h1><b>BOW:</b> Bayesian Optimization over Windows for Motion Planning in Complex Environments</h1>
+            <p class="lead" style="max-width: 800px; margin: 20px auto;">
+                The BOW Planner is a motion planning algorithm that leverages constrained Bayesian optimization to expertly navigate robots through complex environments. By adeptly managing kinodynamic constraints such as velocity and acceleration limits, it ensures fast, secure, and near-optimal trajectory generation with remarkably few samples. Proven across real-world robotic systems, BOW stands out for its sample efficiency, safety-aware optimization, and scalability—making it a game-changer for robotic navigation.
+            </p>
+            <div class="d-flex justify-content-center flex-wrap">
+                <img src="assets/env_overlay.png" alt="BOW Environment" class="img-fluid" style="max-width: 300px; margin: 10px;" />
+                <img src="assets/cbo_samples.png" alt="CBO Samples" class="img-fluid" style="max-width: 300px; margin: 10px;" />
+            </div>
+            <div class="mt-4">
+                <a class="btn btn-primary mr-2" href="assets/bow.pdf" target="_blank">
+                    <svg style="width: 24px; height: 24px; margin-right: 8px;" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M16 0H8C6.9 0 6 .9 6 2V18C6 19.1 6.9 20 8 20H20C21.1 20 22 19.1 22 18V6L16 0M20 18H8V2H15V7H20V18M4 4V22H20V24H4C2.9 24 2 23.1 2 22V4H4M10 10V12H18V10H10M10 14V16H15V14H10Z"></path>
+                    </svg>Paper
+                </a>
+                <a class="btn btn-primary" href="" target="_blank">
+                    <svg style="width: 24px; height: 24px; margin-right: 8px;" viewBox="0 0 496 512">
+                        <path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path>
+                    </svg>Code (Coming Soon)
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container py-4">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <em>BOW efficiently finds optimal controls (white dots) with fewer samples (black dots) compared to traditional methods.</em>
+            </div>
+        </div>
+
+        <!-- SECTION: Key Contributions -->
+        <h1 class="mt-5">Key Contributions</h1>
+        <div class="row">
+            <div class="col-md-12">
+                <p>The BOW Planner introduces several novel advancements in motion planning:</p>
+                <ul>
+                    <li><strong>Constrained Bayesian Optimization:</strong> Integrates safety and kinodynamic constraints directly into the optimization process, ensuring feasible and efficient trajectories.</li>
+                    <li><strong>Window-Based Approach:</strong> Optimizes over sliding windows of control sequences, balancing computational speed with long-term planning accuracy.</li>
+                    <li><strong>Sample Efficiency:</strong> Achieves high-quality trajectories with significantly fewer samples than traditional methods like MPPI or RRT, as demonstrated in benchmark results.</li>
+                    <li><strong>Scalability:</strong> Proven effective across diverse robotic systems (UGVs and UAVs) in complex, high-dimensional environments with real-time performance.</li>
+                </ul>
+            </div>
+        </div>
+        <hr class="my-5" />
+
+        <!-- SECTION: Unmanned Ground Vehicle Experiments -->
+        <h1>Unmanned Ground Vehicle Experiments</h1>
+        <div class="row">
+            <div class="col-md-12">
+                <p>We implemented the BOW Planner for a non-holonomic differential wheel robot navigating through a 2D space with obstacles. Experiments were conducted across five simulated environments and replicated in CoppeliaSim. The robot’s state is a 5D vector (position, orientation, linear and angular velocities), with control inputs as linear and angular velocities. BOW demonstrated rapid navigation and obstacle avoidance, even treating other robots as dynamic obstacles in multi-robot scenarios.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 d-flex flex-nowrap overflow-auto">
+                <img src="assets/env_gv/obstacle_map1.png" alt="Environment 1" class="img-fluid" style="width: 20%; margin-right: 5px;" />
+                <img src="assets/env_gv/obstacle_map2.png" alt="Environment 2" class="img-fluid" style="width: 20%; margin-right: 5px;" />
+                <img src="assets/env_gv/obstacle_map3.png" alt="Environment 3" class="img-fluid" style="width: 20%; margin-right: 5px;" />
+                <img src="assets/env_gv/obstacle_map4.png" alt="Environment 4" class="img-fluid" style="width: 20%; margin-right: 5px;" />
+                <img src="assets/env_gv/obstacle_map5_f.png" alt="Environment 5" class="img-fluid" style="width: 20%;" />
+            </div>
+            <div class="col-md-12 text-center mt-2"><em>Five simulated environments for UGVs: Blue sphere (start), green star (goal), red blocks (obstacles).</em></div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <video controls style="width: 60%; max-width: 600px; display: block; margin: 0 auto;">
+                    <source src="videos/sim_gv.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="col-md-12 text-center mt-2"><em>BOW Planner performance in a simulated UGV environment with static obstacles.</em></div>
+            <div class="col-md-12" style="margin-bottom: 20px;"></div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <video controls style="width: 60%; max-width: 600px; display: block; margin: 0 auto;">
+                    <source src="videos/exp_gv.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="col-md-12 text-center mt-2"><em>Real-world UGV navigation with static and dynamic obstacle avoidance using BOW.</em></div>
+            <div class="col-md-12" style="margin-bottom: 20px;"></div>
+        </div>
+        <hr class="my-5" />
+
+        <!-- SECTION: Unmanned Aerial Vehicle Experiments -->
+        <h1>Unmanned Aerial Vehicle Experiments</h1>
+        <div class="row">
+            <div class="col-md-12">
+                <p>To demonstrate scalability, the BOW Planner was applied to a 6DOF aerial robot in a 3D environment with obstacles. The robot’s state is a 12D vector (position, velocity, orientation, and their derivatives), with control inputs as linear velocities and yaw rate. Evaluated in both CoppeliaSim simulations and real-world tests, BOW efficiently navigated UAVs through varied obstacle densities (0.04–0.14) and dispersities (2.38–4.15), achieving planning times as low as 5.64 ms.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 d-flex flex-nowrap overflow-auto">
+                <img src="assets/env_uav/env1_f.png" alt="UAV Env 1" class="img-fluid" style="width: 20%; margin-right: 5px;" />
+                <img src="assets/env_uav/env2.png" alt="UAV Env 2" class="img-fluid" style="width: 20%; margin-right: 5px;" />
+                <img src="assets/env_uav/env3.png" alt="UAV Env 3" class="img-fluid" style="width: 20%; margin-right: 5px;" />
+                <img src="assets/env_uav/env4.png" alt="UAV Env 4" class="img-fluid" style="width: 20%; margin-right: 5px;" />
+                <img src="assets/env_uav/env5_f.png" alt="UAV Env 5" class="img-fluid" style="width: 20%;" />
+            </div>
+            <div class="col-md-12 text-center mt-2"><em>Five simulated 3D environments for UAVs using BOW in CoppeliaSim (red cubes are obstacles).</em></div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <video controls style="width: 60%; max-width: 600px; display: block; margin: 0 auto;">
+                    <source src="videos/sim_quad.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="col-md-12 text-center mt-2"><em>BOW Planner performance in a simulated UAV 3D environment with static obstacles in CoppeliaSim.</em></div>
+            <div class="col-md-12" style="margin-bottom: 20px;"></div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <video controls style="width: 60%; max-width: 600px; display: block; margin: 0 auto;">
+                    <source src="videos/exp_quad.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="col-md-12 text-center mt-2"><em>Real-world UAV navigation through 3D environments with obstacles using BOW.</em></div>
+            <div class="col-md-12" style="margin-bottom: 20px;"></div>
+        </div>
+        <hr class="my-5" />
+
+        <!-- SECTION: Benchmark Results -->
+        <h1>Benchmark Results</h1>
+        <div class="row">
+            <div class="col-md-12">
+                <p>The BOW Planner was benchmarked against RRT, DWA, MPPI, HRVO, and CBF across five environments with varying obstacle densities (5.02%–8.30%) and dispersities (2.59%–6.20%). BOW consistently achieved the fastest planning times (28.2–78.6 ms) and per-step execution (0.17–0.26 ms), with competitive trajectory lengths (6.88–19.49 m), outperforming others in computational efficiency. The table below summarizes performance across all five environments.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div style="overflow-x: auto;">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th><strong>Env</strong></th>
+                                <th><strong>Method</strong></th>
+                                <th><strong>Lib. + Lang</strong></th>
+                                <th><strong>Steps</strong></th>
+                                <th><strong>Traj. Length (m)</strong></th>
+                                <th><strong>Total Time (ms)</strong></th>
+                                <th><strong>Time/Step (ms)</strong></th>
+                                <th><strong>Density (%)</strong></th>
+                                <th><strong>Dispersity (%)</strong></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Environment 1 -->
+                            <tr>
+                                <td rowspan="6">1</td>
+                                <td><strong>BOW</strong></td>
+                                <td>FCL + C++</td>
+                                <td>203.6 ± 24.87</td>
+                                <td>14.81 ± 0.56</td>
+                                <td><strong>55.6 ± 39.0</strong></td>
+                                <td><strong>0.27</strong></td>
+                                <td rowspan="6">5.95</td>
+                                <td rowspan="6">4.39</td>
+                            </tr>
+                            <tr>
+                                <td>HRVO</td>
+                                <td>C++</td>
+                                <td>539.0 ± 4.23</td>
+                                <td>15.78 ± 0.00</td>
+                                <td>260.0 ± 2.96</td>
+                                <td>0.48</td>
+                            </tr>
+                            <tr>
+                                <td>RRT</td>
+                                <td>FCL + C++</td>
+                                <td>342.0 ± 64.89</td>
+                                <td>17.79 ± 2.56</td>
+                                <td>584.0 ± 321.0</td>
+                                <td>1.71</td>
+                            </tr>
+                            <tr>
+                                <td>DWA</td>
+                                <td>FCL + C++</td>
+                                <td>157.0 ± 1.23</td>
+                                <td>14.30 ± 0.00</td>
+                                <td>135.0 ± 2.31</td>
+                                <td>0.86</td>
+                            </tr>
+                            <tr>
+                                <td>MPPI</td>
+                                <td>CUDA + Py</td>
+                                <td><strong>146.00</strong></td>
+                                <td><strong>13.885 ± 0.0</strong></td>
+                                <td>9705.40 ± 131.91</td>
+                                <td>66.48</td>
+                            </tr>
+                            <tr>
+                                <td>CBF</td>
+                                <td>Gurobi + Py</td>
+                                <td>155.0</td>
+                                <td>14.42 ± 0.0</td>
+                                <td>8837.7 ± 124.7</td>
+                                <td>57.02</td>
+                            </tr>
+                            <!-- Environment 2 -->
+                            <tr>
+                                <td rowspan="6">2</td>
+                                <td><strong>BOW</strong></td>
+                                <td>FCL + C++</td>
+                                <td>184.4 ± 8.55</td>
+                                <td>14.56 ± 0.13</td>
+                                <td><strong>35.9 ± 3.26</strong></td>
+                                <td><strong>0.19</strong></td>
+                                <td rowspan="6">5.60</td>
+                                <td rowspan="6">5.16</td>
+                            </tr>
+                            <tr>
+                                <td>HRVO</td>
+                                <td>C++</td>
+                                <td>341.0 ± 2.68</td>
+                                <td>14.87 ± 0.00</td>
+                                <td>286.0 ± 5.77</td>
+                                <td>0.84</td>
+                            </tr>
+                            <tr>
+                                <td>RRT</td>
+                                <td>FCL + C++</td>
+                                <td>358.1 ± 33.60</td>
+                                <td>19.38 ± 2.56</td>
+                                <td>816.0 ± 280.0</td>
+                                <td>2.28</td>
+                            </tr>
+                            <tr>
+                                <td>DWA</td>
+                                <td>FCL + C++</td>
+                                <td>237.0 ± 1.86</td>
+                                <td>20.83 ± 0.00</td>
+                                <td>74.3 ± 3.25</td>
+                                <td>0.31</td>
+                            </tr>
+                            <tr>
+                                <td>MPPI</td>
+                                <td>CUDA + Py</td>
+                                <td><strong>149.00</strong></td>
+                                <td><strong>13.96 ± 0.0</strong></td>
+                                <td>9977.90 ± 129.77</td>
+                                <td>66.97</td>
+                            </tr>
+                            <tr>
+                                <td>CBF</td>
+                                <td>Gurobi + Py</td>
+                                <td>—</td>
+                                <td>—</td>
+                                <td>—</td>
+                                <td>—</td>
+                            </tr>
+                            <!-- Environment 3 -->
+                            <tr>
+                                <td rowspan="6">3</td>
+                                <td><strong>BOW</strong></td>
+                                <td>FCL + C++</td>
+                                <td>168.4 ± 12.66</td>
+                                <td>13.50 ± 0.39</td>
+                                <td><strong>28.2 ± 1.25</strong></td>
+                                <td><strong>0.17</strong></td>
+                                <td rowspan="6">5.02</td>
+                                <td rowspan="6">6.20</td>
+                            </tr>
+                            <tr>
+                                <td>HRVO</td>
+                                <td>C++</td>
+                                <td>260.0 ± 2.04</td>
+                                <td><strong>12.95 ± 0.00</strong></td>
+                                <td>511.0 ± 4.61</td>
+                                <td>1.96</td>
+                            </tr>
+                            <tr>
+                                <td>RRT</td>
+                                <td>FCL + C++</td>
+                                <td>292.2 ± 28.50</td>
+                                <td>15.85 ± 1.03</td>
+                                <td>644.0 ± 190.0</td>
+                                <td>2.20</td>
+                            </tr>
+                            <tr>
+                                <td>DWA</td>
+                                <td>FCL + C++</td>
+                                <td>185.0 ± 1.45</td>
+                                <td>15.66 ± 0.31</td>
+                                <td>112.0 ± 0.23</td>
+                                <td>0.61</td>
+                            </tr>
+                            <tr>
+                                <td>MPPI</td>
+                                <td>CUDA + Py</td>
+                                <td><strong>128.00</strong></td>
+                                <td>13.03 ± 0.0</td>
+                                <td>8583.6 ± 109.14</td>
+                                <td>67.06</td>
+                            </tr>
+                            <tr>
+                                <td>CBF</td>
+                                <td>Gurobi + Py</td>
+                                <td>175.0</td>
+                                <td>13.482 ± 0.0</td>
+                                <td>12419.3 ± 141.91</td>
+                                <td>70.97</td>
+                            </tr>
+                            <!-- Environment 4 -->
+                            <tr>
+                                <td rowspan="6">4</td>
+                                <td><strong>BOW</strong></td>
+                                <td>FCL + C++</td>
+                                <td>260.2 ± 18.28</td>
+                                <td>19.49 ± 0.72</td>
+                                <td><strong>48.2 ± 2.84</strong></td>
+                                <td><strong>0.19</strong></td>
+                                <td rowspan="6">5.95</td>
+                                <td rowspan="6">5.65</td>
+                            </tr>
+                            <tr>
+                                <td>HRVO</td>
+                                <td>C++</td>
+                                <td>465.0 ± 3.65</td>
+                                <td>21.06 ± 0.00</td>
+                                <td>682.0 ± 13.9</td>
+                                <td>1.47</td>
+                            </tr>
+                            <tr>
+                                <td>RRT</td>
+                                <td>FCL + C++</td>
+                                <td>491.8 ± 103.32</td>
+                                <td>26.76 ± 4.59</td>
+                                <td>1153.0 ± 1183.0</td>
+                                <td>2.34</td>
+                            </tr>
+                            <tr>
+                                <td>DWA</td>
+                                <td>FCL + C++</td>
+                                <td>374.0 ± 2.94</td>
+                                <td>34.43 ± 0.00</td>
+                                <td>209.0 ± 0.36</td>
+                                <td>0.56</td>
+                            </tr>
+                            <tr>
+                                <td>MPPI</td>
+                                <td>CUDA + Py</td>
+                                <td>204.00</td>
+                                <td>18.91 ± 0.0</td>
+                                <td>10863.30 ± 185.08</td>
+                                <td>53.25</td>
+                            </tr>
+                            <tr>
+                                <td>CBF</td>
+                                <td>Gurobi + Py</td>
+                                <td><strong>183.0</strong></td>
+                                <td><strong>18.68 ± 0.0</strong></td>
+                                <td>11636.7 ± 143.64</td>
+                                <td>63.59</td>
+                            </tr>
+                            <!-- Environment 5 -->
+                            <tr>
+                                <td rowspan="6">5</td>
+                                <td><strong>BOW</strong></td>
+                                <td>FCL + C++</td>
+                                <td>299.5 ± 88.33</td>
+                                <td>13.99 ± 4.22</td>
+                                <td><strong>78.6 ± 16.3</strong></td>
+                                <td><strong>0.26</strong></td>
+                                <td rowspan="6">8.30</td>
+                                <td rowspan="6">2.59</td>
+                            </tr>
+                            <tr>
+                                <td>HRVO</td>
+                                <td>C++</td>
+                                <td><strong>164.0 ± 1.29</strong></td>
+                                <td><strong>6.88 ± 0.00</strong></td>
+                                <td>318.0 ± 6.08</td>
+                                <td>1.94</td>
+                            </tr>
+                            <tr>
+                                <td>RRT</td>
+                                <td>FCL + C++</td>
+                                <td>199.2 ± 32.97</td>
+                                <td>10.81 ± 1.30</td>
+                                <td>202.0 ± 66.5</td>
+                                <td>1.01</td>
+                            </tr>
+                            <tr>
+                                <td>DWA</td>
+                                <td>FCL + C++</td>
+                                <td>—</td>
+                                <td>—</td>
+                                <td>—</td>
+                                <td>—</td>
+                            </tr>
+                            <tr>
+                                <td>MPPI</td>
+                                <td>CUDA + Py</td>
+                                <td>486.00</td>
+                                <td>9.91 ± 0.0</td>
+                                <td>25687.50 ± 490.50</td>
+                                <td>52.85</td>
+                            </tr>
+                            <tr>
+                                <td>CBF</td>
+                                <td>Gurobi + Py</td>
+                                <td>—</td>
+                                <td>—</td>
+                                <td>—</td>
+                                <td>—</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="text-center mt-2"><em>Performance comparison across five environments. Best values are in bold. Dashes (—) indicate failure to complete the task.</em></div>
+            </div>
+        </div>
+        <hr class="my-5" />
+
+        <!-- SECTION: Authors -->
+        <h1>Authors</h1>
+        <div class="row">
+            <div class="col-md-12">
+                <p>Anonymous Authors</p>
+            </div>
+        </div>
+        <hr class="my-5" />
+
+        <!-- SECTION: Citation -->
+        <h1>Citation</h1>
+        <div class="row">
+            <div class="col-md-12">
+                <pre class="bg-light p-3">
+@article{anonymous2025bow,
+    author = {Anonymous},
+    title = {BOW: Bayesian Optimization over Windows for Motion Planning in Complex Environments},
+    journal = {},
+    year = {2025},
+}
+                </pre>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="container py-4">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <p>This website is a modification of the <a href="https://aypan17.github.io/machiavelli" target="_blank">Machiavelli project website</a>.</p>
+          </div>
+        </div>
+    </div> -->
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/scripts.js"></script>
+</body>
+
+</html>
