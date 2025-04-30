@@ -38,7 +38,7 @@
             </p>
             <div class="d-flex justify-content-center flex-wrap">
                 <img src="assets/bt_rig.png" alt="LCD-RIG Architecture" class="img-fluid" style="max-width: 300px; margin: 10px;" />
-                <img src="assets/fiu_lake_map.png" alt="FIU MMC Lake Temperature Map" class="img-fluid" style="max-width: 300px; margin: 10px;" />
+                <img src="assets/temp_map.png" alt="FIU MMC Lake Temperature Map" class="img-fluid" style="max-width: 300px; margin: 10px;" />
             </div>
             <div class="mt-4">
                 <a class="btn btn-primary mr-2" href="assets/LCD_RIG_V2.pdf" target="_blank">
@@ -87,11 +87,9 @@
         </div>
         <div class="row">
             <div class="col-md-12 d-flex flex-nowrap overflow-auto">
-                <img src="assets/asv_sensor.png" alt="ASV and Sensor" class="img-fluid" style="width: 20%; margin-right: 5px;" />
-                <img src="assets/robots_workspace.png" alt="Robots in Workspace" class="img-fluid" style="width: 20%; margin-right: 5px;" />
-                <img src="assets/temperature_map.png" alt="Temperature Map" class="img-fluid" style="width: 20%; margin-right: 5px;" />
-                <img src="assets/fiu_lake_sim1.png" alt="Simulation Env 1" class="img-fluid" style="width: 20%; margin-right: 5px;" />
-                <img src="assets/fiu_lake_sim2.png" alt="Simulation Env 2" class="img-fluid" style="width: 20%;" />
+                <img src="assets/asv_sonde.png" alt="ASV and Sensor" class="img-fluid" style="width: 20%; margin-right: 5px;" />
+                <img src="assets/robots_w_ws.png" alt="Robots in Workspace" class="img-fluid" style="width: 20%; margin-right: 5px;" />
+                <img src="assets/temp_map.png" alt="Temperature Map" class="img-fluid" style="width: 20%; margin-right: 5px;" />
             </div>
             <div class="col-md-12 text-center mt-2"><em>Real-world and simulated environments for ASVs: ASV setup, workspace, temperature map, and simulated lake environments.</em></div>
         </div>
@@ -116,14 +114,25 @@
         </div>
         <div class="row">
             <div class="col-md-12 d-flex flex-nowrap overflow-auto">
-                <img src="assets/n45w123_env.png" alt="N45W123 Dataset" class="img-fluid" style="width: 20%; margin-right: 5px;" />
-                <img src="assets/fiu_lake_env.png" alt="FIU Lake Dataset" class="img-fluid" style="width: 20%; margin-right: 5px;" />
-                <img src="assets/srtm_env1.png" alt="SRTM Env 1" class="img-fluid" style="width: 20%; margin-right: 5px;" />
-                <img src="assets/srtm_env2.png" alt="SRTM Env 2" class="img-fluid" style="width: 20%; margin-right: 5px;" />
-                <img src="assets/srtm_env3.png" alt="SRTM Env 3" class="img-fluid" style="width: 20%;" />
+                <img src="assets/N45W123_LCD-RIG.png" alt="N45W123 Dataset" class="img-fluid" style="width: 20%; margin-right: 5px;" />
+                <img src="assets/Temp_map_LCD-RIG.png" alt="FIU Lake Dataset" class="img-fluid" style="width: 20%; margin-right: 5px;" />
+                <img src="assets/3robots_sim.png" alt="SRTM Env 1" class="img-fluid" style="width: 20%; margin-right: 5px;" />
+                <img src="assets/4robots_sim.png" alt="SRTM Env 2" class="img-fluid" style="width: 20%; margin-right: 5px;" />
             </div>
-            <div class="col-md-12 text-center mt-2"><em>Simulated environments for LCD-RIG: N45W123, FIU Lake, and three NASA SRTM datasets.</em></div>
+            <div class="col-md-12 text-center mt-2"><em>The LCD-RIG system's performance was evaluated at FIU Campus Lake and using three digital elevation maps from NASA's Shuttle Radar Topography Mission.</em></div>
         </div>
+        
+        <!-- NEW SECTION: Performance Metrics -->
+        <div class="row mt-4">
+            <div class="col-md-12 d-flex flex-nowrap overflow-auto">
+                <img src="assets/coverage_trends.png" alt="Fig. 3: Coverage trends" class="img-fluid" style="width: 45%; margin-right: 10px;" />
+                <img src="assets/rmse_trends.png" alt="Fig. 4: RMSE trends" class="img-fluid" style="width: 45%; margin-right: 10px;" />
+            </div>
+            <div class="col-md-12 text-center mt-2">
+                <em>Fig. 3: Coverage trends across simulation stages for varying team sizes (left). Fig. 4: Average RMSE trends across simulation stages for varying team sizes (right).</em>
+            </div>
+        </div>
+        
         <div class="row mt-4">
             <div class="col-md-12">
                 <video controls style="width: 60%; max-width: 600px; display: block; margin: 0 auto;">
@@ -140,7 +149,7 @@
         <h1>Benchmark Results</h1>
         <div class="row">
             <div class="col-md-12">
-                <p>The LCD-RIG system was benchmarked against Full GPR, RGPR, DGPR, DRGPR, Local SGPR, and CBDGPR across simulated environments. LCD-RIG achieved a communication complexity of O(K), significantly lower than O(|E|K) of prior methods, with computational complexity of O(K²) and memory complexity of O(|D|). The table below compares complexities, highlighting LCD-RIG’s efficiency in decentralized settings.</p>
+                <p>The LCD-RIG system was benchmarked against Full GPR, RGPR, DGPR, DRGPR, Local SGPR, and CBDGPR across simulated environments. LCD-RIG achieved a communication complexity of O(K), significantly lower than O(|E|K) of prior methods, with computational complexity of O(K²) and memory complexity of O(|D|). The table below compares complexities, highlighting LCD-RIG's efficiency in decentralized settings.</p>
             </div>
         </div>
         <div class="row">
@@ -157,37 +166,37 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Full GPR [31]</td>
+                                <td>Full GPR </td>
                                 <td>O(n²|D|²)</td>
                                 <td>O(n²|D|²)</td>
                                 <td>O(n²|D|)</td>
                             </tr>
                             <tr>
-                                <td>RGPR [16]</td>
+                                <td>RGPR </td>
                                 <td>O(n²|D|²)</td>
                                 <td>O(n²|D|²)</td>
                                 <td>O(n²|D|)</td>
                             </tr>
                             <tr>
-                                <td>DGPR [21,22]</td>
+                                <td>DGPR </td>
                                 <td>O(|D|²)</td>
                                 <td>O(|D|²)</td>
                                 <td>O(|E|K)</td>
                             </tr>
                             <tr>
-                                <td>DRGPR [23]</td>
+                                <td>DRGPR </td>
                                 <td>O(|D|²)</td>
                                 <td>O(|D|²)</td>
                                 <td>O(|E|K)</td>
                             </tr>
                             <tr>
-                                <td>Local SGPR [6,24]</td>
+                                <td>Local SGPR </td>
                                 <td>O(n²|D|)</td>
                                 <td>O(n²|S|²)</td>
                                 <td>O(n²|S|)</td>
                             </tr>
                             <tr>
-                                <td>CBDGPR [5]</td>
+                                <td>CBDGPR </td>
                                 <td>O(n²|D|)</td>
                                 <td>O(n²|S|)</td>
                                 <td>O(|E|K)</td>
@@ -211,7 +220,7 @@
         <div class="row">
             <div class="col-md-12">
                 <p>Abdullah Al Redwan Newaz¹, Paulo Padrao², Jose Fuentes², Tauhidul Alam³, Ganesh Govindarajan², Leonardo Bobadilla²</p>
-                <p>¹University of New Orleans, ²Florida International University, ³University of Maryland Eastern Shore</p>
+                <p>¹University of New Orleans, ²Florida International University, ³Lamar University</p>
             </div>
         </div>
         <hr class="my-5" />
@@ -221,11 +230,12 @@
         <div class="row">
             <div class="col-md-12">
                 <pre class="bg-light p-3">
-@article{redwan2024lcdrig,
-    author = {Redwan Newaz, Abdullah Al and Padrao, Paulo and Fuentes, Jose and Alam, Tauhidul and Govindarajan, Ganesh and Bobadilla, Leonardo},
-    title = {LCD-RIG: Limited Communication Decentralized Robotic Information Gathering Systems},
-    journal = {IEEE Robotics and Automation Letters},
-    year = {2024},
+@article{newaz2024lcd,
+  title={LCD-RIG: Limited Communication Decentralized Robotic Information Gathering Systems},
+  author={Newaz, Abdullah Al Redwan and Padrao, Paulo and Fuentes, Jose and Alam, Tauhidul and Govindarajan, Ganesh and Bobadilla, Leonardo},
+  journal={IEEE Robotics and Automation Letters},
+  year={2024},
+  publisher={IEEE}
 }
                 </pre>
             </div>
