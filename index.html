@@ -25,7 +25,8 @@
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/p5@1.6.0/lib/p5.js"></script>
-    <script src="sketch.js" type="text/javascript"></script>
+    <script src="sketch_1.js" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 
 <body>
@@ -57,11 +58,6 @@
 
     <!-- Main Content -->
     <div class="container py-4">
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <em>LCD-RIG enables robots to efficiently map scalar fields (colored map) with sparse samples (black dots) under limited communication.</em>
-            </div>
-        </div>
 
         <!-- SECTION: Key Contributions -->
         <h1 class="mt-5">Key Contributions</h1>
@@ -72,7 +68,7 @@
                     <li><strong>Decentralized Architecture:</strong> Enables robots to share local experiences and coordinate tasks through pairwise, asynchronous communication within a limited range, reducing reliance on global connectivity.</li>
                     <li><strong>Quadtree Decomposition:</strong> Dynamically subdivides the workspace to minimize exploration overlap and enhance spatial coverage, using a modular behavior tree framework.</li>
                     <li><strong>Attentive Kernel Gaussian Process:</strong> Facilitates adaptive information estimation with sparse data, optimizing sampling locations to reduce predictive uncertainty.</li>
-                    <li><strong>Theoretical Guarantees:</strong> Provides proofs of convergence and bounded regret, with cumulative regret scaling as O(√Area(𝒲)R_T) for typical scalar fields, ensuring near-optimal exploration.</li>
+                    <li><strong>Theoretical Guarantees:</strong> Provides proofs of convergence and bounded regret, with cumulative regret scaling as \( O\left(\sqrt{\text{Area}(\mathcal{W})} \, R_T\right) \) for typical scalar fields, ensuring near-optimal exploration.</li>
                 </ul>
             </div>
         </div>
@@ -120,7 +116,7 @@
                 <img src="assets/robots_w_ws.png" alt="Robots in Workspace" class="img-fluid" style="width: 31%; margin-right: 5px;" />
                 <img src="assets/temp_map.png" alt="Temperature Map" class="img-fluid" style="width: 31%; margin-right: 5px;" />
             </div>
-            <div class="col-md-12 text-center mt-2"><em>Real-world and simulated environments for ASVs: ASV setup, workspace, temperature map, and simulated lake environments.</em></div>
+            <div class="col-md-12 text-center mt-2"><em>Real-world and simulated environments for ASVs: ASV setup, workspace, and temperature map.</em></div>
         </div>
         <hr class="my-5" />
         
@@ -130,7 +126,7 @@
                     <iframe width="560" height="315" src="https://www.youtube.com/embed/WNDXamTPiTw?si=enYgzMotCxCzZN6D" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                 </div>
             </div>
-            <div class="col-md-12 text-center mt-2"><em>LCD-RIG performance in real-world ASV temperature mapping at FIU MMC Campus Lake. LCD-RIG performance in a simulated FIU MMC Lake environment with multiple ASVs.</em></div>
+            <div class="col-md-12 text-center mt-2"><em>LCD-RIG demonstrates robust performance in real-world temperature mapping via ASVs at FIU MMC Campus Lake and in simulated multi-ASV lake environments.</em></div>
             <div class="col-md-12" style="margin-bottom: 20px;"></div>
         </div>
         <hr class="my-5" />
