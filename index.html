@@ -78,32 +78,6 @@
         </div>
         <hr class="my-5" />
 
-        <!-- SECTION: Autonomous Surface Vehicle Experiments -->
-        <h1>Autonomous Surface Vehicle Experiments</h1>
-        <div class="row">
-            <div class="col-md-12">
-                <p>The LCD-RIG system was implemented on three SeaRobotics Surveyor ASVs to map water temperature in a 28m × 28m workspace at FIU's MMC Campus Lake. Each ASV, equipped with a YSI EXO2 sonde, measured temperature at 1 Hz, with localization via GPS and IMU. The LCD-RIG algorithm coordinated ASV motion to efficiently sample the temperature field while avoiding collisions, validated by generating an online temperature map.</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12 d-flex flex-nowrap overflow-auto">
-                <img src="assets/asv_sonde.png" alt="ASV and Sensor" class="img-fluid" style="width: 31%; margin-right: 5px;" />
-                <img src="assets/robots_w_ws.png" alt="Robots in Workspace" class="img-fluid" style="width: 31%; margin-right: 5px;" />
-                <img src="assets/temp_map.png" alt="Temperature Map" class="img-fluid" style="width: 31%; margin-right: 5px;" />
-            </div>
-            <div class="col-md-12 text-center mt-2"><em>Real-world and simulated environments for ASVs: ASV setup, workspace, temperature map, and simulated lake environments.</em></div>
-        </div>
-        <div class="row mt-4">
-            <div class="col-md-12">
-                <video controls style="width: 60%; max-width: 600px; display: block; margin: 0 auto;">
-                    <source src="videos/lcd_rig_f_e.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-            </div>
-            <div class="col-md-12 text-center mt-2"><em>LCD-RIG performance in real-world ASV temperature mapping at FIU MMC Campus Lake.</em></div>
-            <div class="col-md-12" style="margin-bottom: 20px;"></div>
-        </div>
-        <hr class="my-5" />
 
         <!-- SECTION: Simulation Experiments -->
         <h1>Simulation Experiments</h1>
@@ -132,15 +106,31 @@
                 <em>Multiple robots enhance both spatial coverage and prediction accuracy, though excessive numbers can lead to congestion and reduced team efficiency.</em>
             </div>
         </div>
+
+        <!-- SECTION: Autonomous Surface Vehicle Experiments -->
+        <h1>Autonomous Surface Vehicle Experiments</h1>
+        <div class="row">
+            <div class="col-md-12">
+                <p>The LCD-RIG system was implemented on three SeaRobotics Surveyor ASVs to map water temperature in a 28m × 28m workspace at FIU's MMC Campus Lake. Each ASV, equipped with a YSI EXO2 sonde, measured temperature at 1 Hz, with localization via GPS and IMU. The LCD-RIG algorithm coordinated ASV motion to efficiently sample the temperature field while avoiding collisions, validated by generating an online temperature map.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 d-flex flex-nowrap overflow-auto">
+                <img src="assets/asv_sonde.png" alt="ASV and Sensor" class="img-fluid" style="width: 31%; margin-right: 5px;" />
+                <img src="assets/robots_w_ws.png" alt="Robots in Workspace" class="img-fluid" style="width: 31%; margin-right: 5px;" />
+                <img src="assets/temp_map.png" alt="Temperature Map" class="img-fluid" style="width: 31%; margin-right: 5px;" />
+            </div>
+            <div class="col-md-12 text-center mt-2"><em>Real-world and simulated environments for ASVs: ASV setup, workspace, temperature map, and simulated lake environments.</em></div>
+        </div>
+        <hr class="my-5" />
         
         <div class="row mt-4">
             <div class="col-md-12">
-                <video controls style="width: 60%; max-width: 600px; display: block; margin: 0 auto;">
-                    <source src="videos/sim_lake.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
+                <div style="width: 60%; max-width: 600px; margin: 0 auto;">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/WNDXamTPiTw?si=enYgzMotCxCzZN6D" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
             </div>
-            <div class="col-md-12 text-center mt-2"><em>LCD-RIG performance in a simulated FIU MMC Lake environment with multiple ASVs.</em></div>
+            <div class="col-md-12 text-center mt-2"><em>LCD-RIG performance in real-world ASV temperature mapping at FIU MMC Campus Lake. LCD-RIG performance in a simulated FIU MMC Lake environment with multiple ASVs.</em></div>
             <div class="col-md-12" style="margin-bottom: 20px;"></div>
         </div>
         <hr class="my-5" />
